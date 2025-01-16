@@ -15,6 +15,8 @@ java {
 }
 
 repositories {
+	mavenLocal()
+	maven { url = uri("https://maven.aliyun.com/repository/public") }
 	mavenCentral()
 	maven { url = uri("https://repo.spring.io/milestone") }
 	maven { url = uri("https://repo.spring.io/snapshot") }

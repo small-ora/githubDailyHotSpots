@@ -12,7 +12,7 @@ dependencyManagement {
 }
 
 group = "win.nelson"
-version = "0.0.1-SNAPSHOT"
+version = "1.0"
 
 java {
 	toolchain {
@@ -59,5 +59,5 @@ tasks.bootJar {
 // 添加一个任务来构建 Docker 镜像
 tasks.register<Exec>("buildDockerImage") {
 	dependsOn(tasks.build)
-	commandLine("docker", "build", "-t", "githubDailyHotSpots:${project.version}", ".")
+	commandLine("docker", "build", "-t", "github_daily_hotspots:${project.version}", ".")
 }

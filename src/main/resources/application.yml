@@ -26,4 +26,4 @@ mail:
   from: ${MAIL_USERNAME}
 
 scheduler:
-  cronExpression: "0 3 17 * * ? "  # 每天凌晨1点执行
+  cronExpression: "${SCHEDULER_CRON:0 0 8 * * ?}"

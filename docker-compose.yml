@@ -2,12 +2,18 @@ version: '3.8'
 
 services:
   githubdailyhotspots:
-    image: ghcr.io/zhang-zhe-qing/githubdailyhotspots:latest
+    image: github_daily_hotspots
+    container_name: githubdailyhotspots
+    restart: always
     environment:
+      #大模型相关配置
       - LLM_KEY=
       - LLM_MODEL=
       - LLM_URL=
+      #邮件相关配置
       - MAIL_HOST=
       - MAIL_PORT=
       - MAIL_USERNAME=
       - MAIL_PASSWORD=
+      #执行任务的时间，cron表达式
+      - SCHEDULER_CRON=

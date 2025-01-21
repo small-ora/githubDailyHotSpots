@@ -10,6 +10,11 @@ jobs:
     runs-on: gitea_runner
 
     steps:
+    - name: Setup Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '16'  # 选择一个合适的Node.js版本
+
     - uses: actions/checkout@v4
 
     - name: Set up JDK 21

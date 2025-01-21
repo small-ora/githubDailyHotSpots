@@ -14,7 +14,5 @@ class GithubDailyHotSpotsApplication
 
 
 fun main(args: Array<String>) {
-	val runApplication = runApplication<GithubDailyHotSpotsApplication>(*args)
-	val llmSummarize = runApplication.getBean(LlmSummarize::class.java)
-
+	runApplication<GithubDailyHotSpotsApplication>(*args)
 }

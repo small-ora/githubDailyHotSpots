@@ -12,15 +12,15 @@ import win.nelson.githubDailyHotSpots.process.TrendingProcess
 @Component
 class CronTask(
     val scheduler: SchedulerConfig,
-    val llmSummarize: LlmSummarize,
-    val mailConfig: MailConfig
+    val trendingProcess: TrendingProcess,
+    val mailPipeline: MailPipeline
 ) {
 
     @Scheduled(cron = "\${scheduler.cronExpression}")
     fun cronTask() {
-        Spider.create(TrendingProcess(llmSummarize))
+        Spider.create(trendingProcess)
             .addUrl("https://github.com/trending")
-            .addPipeline(MailPipeline(mailConfig))
+            .addPipeline(mailPipeline)
             .run()
     }
 }

@@ -1,0 +1,13 @@
+version: '3.8'
+
+services:
+  githubdailyhotspots:
+    image: ghcr.io/zhang-zhe-qing/githubdailyhotspots:latest
+    environment:
+      - LLM_KEY=
+      - LLM_MODEL=
+      - LLM_URL=
+      - MAIL_HOST=
+      - MAIL_PORT=
+      - MAIL_USERNAME=
+      - MAIL_PASSWORD=

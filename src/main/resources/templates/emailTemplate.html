@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Github Daily Hot Spots</title>
+</head>
+<body>
+    <h1>Github Daily Hot Spots</h1>
+    <ul>
+        <li th:each="project : ${projects}">
+            <a th:href="${project.projectUrl}" th:text="${project.projectName}"></a>
+            <p th:text="${project.projectDetail}"></p>
+        </li>
+    </ul>
+</body>
+</html>

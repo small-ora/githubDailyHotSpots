@@ -37,13 +37,14 @@ class TrendingProcess(val llmSummarize: LlmSummarize) : PageProcessor {
             val strings = item.split("/").filter { it.isNotEmpty() }
             val owner = strings.first()
             val repo = strings.last()
-            //获取项目默认分支
+            //获取项目信息
             val repositoryReadme = HttpUtil.get("https://api.github.com/repos/$owner/$repo/readme")
             val readmeInfo = JSONObject.parse(repositoryReadme).to(RepositoryReadme::class.java)
             if (readmeInfo == null){
-                logger.warn("无法获取README文件信息")
+                logger.error("无法获取README文件信息")
+                return
             }
-            logger.info("README文件信息: ${readmeInfo.name}, 大小: ${readmeInfo.size}")
+            logger.info("仓库信息: $repo")
             // 解码Base64内容
             val readmeContent = Base64.decodeStr(readmeInfo.content)
             //调用大模型总结
@@ -51,7 +52,7 @@ class TrendingProcess(val llmSummarize: LlmSummarize) : PageProcessor {
             val projectData = ProjectData(repo, "https://github.com/$owner/$repo", summarize)
             projectDatas.add(projectData)
         }
-        page.putField("projectDatas",projectDatas)
+        page.putField("projects",projectDatas)
 
     }
 

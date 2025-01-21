@@ -1,18 +1,29 @@
 spring:
   application:
     name: githubDailyHotSpots
+  thymeleaf:
+    mode: HTML
+    prefix: classpath:/templates/
+    suffix: .html
+    cache: false
+    encoding: UTF-8
+  mail:
+    host: ${MAIL_HOST}
+    port: ${MAIL_PORT}
+    username: ${MAIL_USERNAME}
+    password: ${MAIL_PASSWORD}
+    from: ${MAIL_FROM}
+    ssl:
+      enabled: true
+
 llm:
-  key: ${API_KEY}
+  key: ${LLM_KEY}
   model: ${LLM_MODEL}
   url: ${LLM_URL}
 mail:
-  from: ${MAIL_FROM}
   to: ${MAIL_TO}
   subject: ${MAIL_SUBJECT}
-  password: ${MAIL_PASSWORD}
-  host: ${MAIL_HOST}
-  port: ${MAIL_PORT}
-  username: ${MAIL_USERNAME}
+  from: ${MAIL_USERNAME}
 
 scheduler:
-  cronExpression: "0 0 1 * * ?"  # 每天凌晨1点执行
+  cronExpression: "0 3 17 * * ? "  # 每天凌晨1点执行

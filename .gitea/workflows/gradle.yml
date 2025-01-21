@@ -10,6 +10,11 @@ jobs:
     runs-on: gitea_runner
 
     steps:
+    - name: Check Node
+      run: |
+        node -v
+        npm -v
+
     - name: Setup Node.js
       uses: actions/setup-node@v3
       with:

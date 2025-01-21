@@ -48,7 +48,7 @@
 - `docker-compose.yml`: Docker Compose配置文件
 
 ## 贡献
-欢迎任何形式的贡献，请参考[贡献指南](CONTRIBUTING.md)
+欢迎任何形式的贡献
 
 ## 许可证
 本项目采用[MIT许可证](LICENSE)

@@ -33,7 +33,7 @@ dependencies {
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
 	implementation("us.codecraft:webmagic-core:1.0.1")
 	implementation("cn.hutool:hutool-http")
-	implementation("cn.hutool:Hutoo-extra")
+	implementation("cn.hutool:hutool-extra")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 	testImplementation("org.jetbrains.kotlin:kotlin-test-junit5")
 	testRuntimeOnly("org.junit.platform:junit-platform-launcher")

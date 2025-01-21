@@ -1,4 +1,4 @@
-package win.nelson.githubDailyHotSpots
+package win.nelson.githubDailyHotSpots.task
 
 import org.springframework.scheduling.annotation.Scheduled
 import org.springframework.stereotype.Component
@@ -13,7 +13,8 @@ import win.nelson.githubDailyHotSpots.process.TrendingProcess
 class CronTask(
     val scheduler: SchedulerConfig,
     val llmSummarize: LlmSummarize,
-    val mailConfig: MailConfig) {
+    val mailConfig: MailConfig
+) {
 
     @Scheduled(cron = "\${scheduler.cronExpression}")
     fun cronTask() {

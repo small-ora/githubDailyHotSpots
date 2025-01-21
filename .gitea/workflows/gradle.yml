@@ -10,7 +10,10 @@ jobs:
     runs-on: gitea_runner
 
     steps:
-    - uses: actions/checkout@v4
+    - name: Checkout
+      uses: actions/checkout@v4
+      with:
+        path: main
 
     - name: Set up JDK 21
       uses: actions/setup-java@v3

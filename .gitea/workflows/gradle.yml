@@ -15,14 +15,6 @@ jobs:
         node -v
         npm -v
 
-    - name: Setup Node.js
-      uses: actions/setup-node@v3
-      with:
-        node-version: '16'  # 选择一个合适的Node.js版本
-
-    - name: Add Node.js to PATH
-      run: echo "##[path]$(npm config get prefix)/bin"
-
     - uses: actions/checkout@v4
 
     - name: Set up JDK 21

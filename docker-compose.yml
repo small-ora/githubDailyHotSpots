@@ -5,7 +5,10 @@ services:
     image: github_daily_hotspots
     container_name: githubdailyhotspots
     restart: always
+    volumes:
+      - ./logs:/app/logs
     environment:
+      - TZ=Asia/Shanghai
       #大模型相关配置
       - LLM_KEY=
       - LLM_MODEL=
@@ -15,5 +18,6 @@ services:
       - MAIL_PORT=
       - MAIL_USERNAME=
       - MAIL_PASSWORD=
+      - MAIL_TO=
       #执行任务的时间，cron表达式
       - SCHEDULER_CRON=

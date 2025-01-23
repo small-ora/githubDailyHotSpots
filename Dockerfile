@@ -5,7 +5,7 @@ WORKDIR /app
 # 复制项目文件到工作目录
 COPY --chown=gradle:gradle . .
 # 构建项目并生成可执行的 JAR 文件
-RUN gradle build --no-daemon --refresh-dependencies
+RUN gradle build --no-daemon
 
 # 使用官方的 OpenJDK 镜像作为运行环境
 FROM openjdk:21-jdk

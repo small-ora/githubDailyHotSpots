@@ -1,5 +1,5 @@
 # 使用官方的 Kotlin 和 Gradle 镜像作为构建环境
-FROM gradle:8.5-jdk21 AS build
+FROM gradle:8.12.0-jdk21 AS build
 # 设置工作目录
 WORKDIR /app
 # 复制项目文件到工作目录
@@ -8,7 +8,7 @@ COPY --chown=gradle:gradle . .
 RUN gradle build --no-daemon
 
 # 使用官方的 OpenJDK 镜像作为运行环境
-FROM openjdk:21-jdk-slim
+FROM openjdk:21-jdk
 # 设置工作目录
 WORKDIR /app
 # 从构建阶段复制生成的 JAR 文件

@@ -9,12 +9,6 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
-      # 直接使用预装 Docker CLI 的容器镜像
-    container:
-      image: docker:cli
-      options:
-        -v /var/run/docker.sock:/var/run/docker.sock  # 挂载宿主机 Docker 套接字
-        --network host  # 可选：如果需要使用宿主机网络
     env:
       http_proxy: http://192.168.31.250:7890
       https_proxy: http://192.168.31.250:7890

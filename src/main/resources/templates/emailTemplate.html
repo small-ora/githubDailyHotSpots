@@ -2,14 +2,16 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <script src="https://cdn.tailwindcss.com"></script>
     <title>Github Daily Hot Spots</title>
 </head>
 <body>
-    <h1>Github Daily Hot Spots</h1>
-    <ul>
-        <li th:each="project : ${projects}">
-            <a th:href="${project.projectUrl}" th:text="${project.projectName}"></a>
-            <p th:text="${project.projectDetail}"></p>
+    <h1 class="text-4xl font-bold align-baseline">Github Daily Hot Spots</h1>
+    <br style="line-height: 40px;">
+    <ul class="space-y-4">
+        <li class="bg-gray-100 p-4 rounded-md shadow-sm" th:each="project : ${projects}">
+            <a class="block mb-4 text-2xl font-semibold text-purple-600 after:content-['_↗']" th:href="${project.projectUrl}" th:text="${project.projectName}"></a>
+            <p class="mt-2 break-words text-gray-800 text-base leading-relaxed" th:text="${project.projectDetail}"></p>
         </li>
     </ul>
 </body>

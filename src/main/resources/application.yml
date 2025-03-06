@@ -15,6 +15,14 @@ spring:
     from: ${MAIL_FROM}
     ssl:
       enabled: true
+  datasource:
+    url: jdbc:sqlite:db/database.db
+    driver-class-name: org.sqlite.JDBC
+  jpa:
+    database-platform: org.hibernate.community.dialect.SQLiteDialect
+    show-sql: true
+    hibernate:
+      ddl-auto: update
 
 llm:
   key: ${LLM_KEY}

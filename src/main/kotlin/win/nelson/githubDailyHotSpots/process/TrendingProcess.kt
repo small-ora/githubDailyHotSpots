@@ -1,6 +1,8 @@
 package win.nelson.githubDailyHotSpots.process
 
 import cn.hutool.core.codec.Base64
+import cn.hutool.core.util.StrUtil
+import cn.hutool.core.util.URLUtil.url
 import cn.hutool.http.Header
 import cn.hutool.http.HttpUtil
 import com.alibaba.fastjson2.JSONObject
@@ -12,9 +14,11 @@ import us.codecraft.webmagic.processor.PageProcessor
 import win.nelson.githubDailyHotSpots.data.ProjectData
 import win.nelson.githubDailyHotSpots.data.RepositoryReadme
 import win.nelson.githubDailyHotSpots.llm.LlmSummarize
+import win.nelson.githubDailyHotSpots.repository.ProjectRepository
 
 @Component
-class TrendingProcess(val llmSummarize: LlmSummarize) : PageProcessor {
+class TrendingProcess(val llmSummarize: LlmSummarize,
+    val db: ProjectRepository) : PageProcessor {
 
     private val logger = LoggerFactory.getLogger(TrendingProcess::class.java)
 
@@ -40,6 +44,13 @@ class TrendingProcess(val llmSummarize: LlmSummarize) : PageProcessor {
             val owner = strings.first()
             val repo = strings.last()
             var summarize = "查询信息或调用大模型失败！"
+            val url = "https://github.com/$owner/$repo"
+            val data = db.findByProjectUrlIgnoreCase(url)
+            if (data != null && StrUtil.isNotBlank(data.projectUrl)) {
+                logger.info("项目已存在，跳过：$url")
+                projectDatas.add(data)
+                continue
+            }
             try {
                 //获取项目信息
                 val repositoryReadme = HttpUtil.createGet("https://api.github.com/repos/$owner/$repo/readme")
@@ -59,8 +70,10 @@ class TrendingProcess(val llmSummarize: LlmSummarize) : PageProcessor {
                 summarize = llmSummarize.summarize(readmeContent)
             }catch (e: Exception){
                 logger.error("调用大模型失败！", e)
+                continue
             }
-            val projectData = ProjectData(repo, "https://github.com/$owner/$repo", summarize)
+            val projectData = ProjectData(null, repo, url, summarize)
+            db.save<ProjectData>(projectData)
             projectDatas.add(projectData)
         }
         page.putField("projects",projectDatas)

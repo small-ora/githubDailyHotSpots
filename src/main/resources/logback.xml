@@ -18,7 +18,7 @@
             <!-- 日志文件按天滚动 -->
             <fileNamePattern>${LOG_PATH}/application-%d{yyyy-MM-dd}.log</fileNamePattern>
             <!-- 保留30天的日志文件 -->
-            <maxHistory>30</maxHistory>
+            <maxHistory>3</maxHistory>
         </rollingPolicy>
         <encoder>
             <pattern>%d{yyyy-MM-dd HH:mm:ss} %-5level %logger{36} - %msg%n</pattern>

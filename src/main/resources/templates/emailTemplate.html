@@ -11,7 +11,7 @@
     <ul class="space-y-4">
         <li class="bg-gray-100 p-4 rounded-md shadow-sm" th:each="project : ${projects}">
             <a class="block mb-4 text-2xl font-semibold text-purple-600 after:content-['_↗']" th:href="${project.projectUrl}" th:text="${project.projectName}"></a>
-            <p class="mt-2 break-words text-gray-800 text-base leading-relaxed" th:text="${project.projectDetail}"></p>
+            <div class="prose" th:utext="${project.projectDetail}"></div>
         </li>
     </ul>
 </body>

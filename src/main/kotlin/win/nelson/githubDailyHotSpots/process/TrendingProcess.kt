@@ -57,7 +57,7 @@ class TrendingProcess(val llmSummarize: LlmSummarize,
                     .header(Header.AUTHORIZATION, "Bearer $token")
                     .execute()
                     .body()
-                logger.info("仓库返回信息：$repositoryReadme")
+//                logger.info("仓库返回信息：$repositoryReadme")
                 val readmeInfo = JSONObject.parse(repositoryReadme).to(RepositoryReadme::class.java)
                 if (readmeInfo == null){
                     logger.error("无法获取README文件信息")

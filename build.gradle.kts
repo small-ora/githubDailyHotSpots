@@ -72,10 +72,7 @@ tasks.create("buildDockerImage", com.bmuschko.gradle.docker.tasks.image.DockerBu
 			into("docker")
 		}
 	}
-}
-
-// 清理时删除临时文件
-tasks.clean {
+	// 清理时删除临时文件
 	doLast {
 		delete("docker/app.jar")
 	}

@@ -26,7 +26,7 @@ class TrendingProcess(val llmSummarize: LlmSummarize,
 
     private val site = Site.me()
             .setDomain("github.com")
-            .setUserAgent("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.101 Safari/537.36")
+            .setUserAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36")
             .setRetryTimes(3)
             .setCycleRetryTimes(3)
             .setTimeOut(60000)

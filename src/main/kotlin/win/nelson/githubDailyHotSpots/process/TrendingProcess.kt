@@ -6,6 +6,8 @@ import cn.hutool.core.util.URLUtil.url
 import cn.hutool.http.Header
 import cn.hutool.http.HttpUtil
 import com.alibaba.fastjson2.JSONObject
+import com.wc.amazon.http.HttpRequestInterceptor
+import com.wc.amazon.http.HttpResponseInterceptor
 import org.slf4j.LoggerFactory
 import org.springframework.stereotype.Component
 import us.codecraft.webmagic.Page
@@ -27,10 +29,11 @@ class TrendingProcess(val llmSummarize: LlmSummarize,
             .setUserAgent("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.101 Safari/537.36")
             .setRetryTimes(3)
             .setCycleRetryTimes(3)
-            .setTimeOut(10000)
+            .setTimeOut(60000)
             .setCharset("utf-8")
 
     override fun process(page: Page?) {
+        logger.info("开始获取项目列表")
         val all = page?.html?.xpath("//h2[@class='h3 lh-condensed']//a/@href")?.all()
         if (all.isNullOrEmpty()) {
             println("列表为空！！！")
@@ -55,6 +58,8 @@ class TrendingProcess(val llmSummarize: LlmSummarize,
                 //获取项目信息
                 val repositoryReadme = HttpUtil.createGet("https://api.github.com/repos/$owner/$repo/readme")
                     .header(Header.AUTHORIZATION, "Bearer $token")
+                    .addRequestInterceptor(HttpRequestInterceptor())
+                    .addResponseInterceptor(HttpResponseInterceptor())
                     .execute()
                     .body()
 //                logger.info("仓库返回信息：$repositoryReadme")

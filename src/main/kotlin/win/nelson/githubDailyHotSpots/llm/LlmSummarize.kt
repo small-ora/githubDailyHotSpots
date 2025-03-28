@@ -3,6 +3,8 @@ package win.nelson.githubDailyHotSpots.llm
 import cn.hutool.http.HttpRequest
 import com.alibaba.fastjson2.JSONArray
 import com.alibaba.fastjson2.JSONObject
+import com.wc.amazon.http.HttpRequestInterceptor
+import com.wc.amazon.http.HttpResponseInterceptor
 import org.springframework.stereotype.Component
 import win.nelson.githubDailyHotSpots.config.LlmConfig
 
@@ -45,6 +47,8 @@ class LlmSummarize(val llmConfig: LlmConfig) {
 
         val body = HttpRequest.post(llmConfig.url)
             .auth("Bearer " + llmConfig.key)
+            .addRequestInterceptor(HttpRequestInterceptor())
+            .addResponseInterceptor(HttpResponseInterceptor())
             .body(bodyJson.toJSONString()).execute().body()
         val parse = JSONObject.parse(body)
         val choices = parse.getJSONArray("choices")[0] as JSONObject

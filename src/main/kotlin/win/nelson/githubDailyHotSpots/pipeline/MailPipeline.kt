@@ -52,6 +52,7 @@ class MailPipeline(
         helper.setText(htmlContent, true)
 
         mailSender.send(message)
+        logger.info("邮件发送成功")
     }
 
 }
